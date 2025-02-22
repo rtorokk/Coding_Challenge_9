@@ -40,3 +40,22 @@ console.log(mgr1.getDetails());//Manager: John Smith, ID: 201, Department: IT, S
 
 console.log("Expected Bonus:", mgr1.calculateBonus());//Expected Bonus: 7200
 
+// Task 3: Creating a Company Class
+
+class Company {
+    constructor(name) {
+        this.name = name;//name of the company
+        this.employees = [];//array of employees
+    }
+    addEmployee(employee) {
+        this.employees.push(employee);//adding employee to the array
+    }
+    listEmployees() {
+      this.employees.forEach(employee => console.log(employee.getDetails()));//listing the employees
+    }
+}; // end of company class
+
+const company = new Company("TechCorp");
+company.addEmployee(emp1);//adding employee to the company
+company.addEmployee(mgr1);//adding manager to the company
+company.listEmployees();//listing the employees
