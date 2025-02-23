@@ -11,14 +11,15 @@ class Employee {
         return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
     } // end of details
     calculateAnnualSalary() {
-        return this.salary * 12;// annual salary of the employee
+        return this.salary * 12;//annual salary of the employee
     } 
-}; // end of employee class
+};// end of employee class
 
 const emp1 = new Employee('Alice Johnson', 101, 'Sales', 5000);
-console.log(emp1.getDetails());//Employee: Alice Johnson, ID: 101, Department: Sales, Salary: 5000
 
+console.log(emp1.getDetails());//Employee: Alice Johnson, ID: 101, Department: Sales, Salary: 5000
 console.log("Expected Salary:", emp1.calculateAnnualSalary());//60000
+
 
 // Task 2: Creating a Manager Class
 
@@ -40,6 +41,7 @@ console.log(mgr1.getDetails());//Manager: John Smith, ID: 201, Department: IT, S
 
 console.log("Expected Bonus:", mgr1.calculateBonus());//Expected Bonus: 7200
 
+
 // Task 3: Creating a Company Class
 
 class Company {
@@ -53,9 +55,24 @@ class Company {
     listEmployees() {
       this.employees.forEach(employee => console.log(employee.getDetails()));//listing the employees
     }
-}; // end of company class
+    calculateTotalPayroll() {
+        return this.employees.reduce((total, employee) => {
+            const annualSalary = employee.calculateAnnualSalary();
+            const bonus = employee instanceof Manager ? employee.calculateBonus() : 0;
+            return total + annualSalary + bonus;
+        }, 0);
+    }
+   
+};// end of company class
 
 const company = new Company("TechCorp");
 company.addEmployee(emp1);//adding employee to the company
 company.addEmployee(mgr1);//adding manager to the company
 company.listEmployees();//listing the employees
+
+console.log("Total Payroll:", company.calculateTotalPayroll());//Total Payroll: 84000
+
+
+
+
+
