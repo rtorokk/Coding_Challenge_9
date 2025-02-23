@@ -55,14 +55,18 @@ class Company {
     listEmployees() {
       this.employees.forEach(employee => console.log(employee.getDetails()));//listing the employees
     }
-    calculateTotalPayroll() {
-        return this.employees.reduce((total, employee) => {
-            const annualSalary = employee.calculateAnnualSalary();
-            const bonus = employee instanceof Manager ? employee.calculateBonus() : 0;
-            return total + annualSalary + bonus;
+    calculateTotalPayroll() {// Add Task 4: Implementing the Payroll System
+        return this.employees.reduce((total, employee) => {// calculating the total payroll
+            const annualSalary = employee.calculateAnnualSalary();//annual salary of the employee
+            const bonus = employee instanceof Manager ? employee.calculateBonus() : 0;//bonus of the manager
+            return total + annualSalary + bonus;//total payroll
         }, 0);
     }
-   
+    promoteToManager(employee, teamSize) { // Add Task 5: Implementing Promotions
+        this.employees = this.employees.map(emp => 
+            emp === employee ? new Manager(emp.name, emp.id, emp.department, emp.salary, teamSize) : emp//promoting employee to manager
+        );
+    }
 };// end of company class
 
 const company = new Company("TechCorp");
@@ -70,7 +74,14 @@ company.addEmployee(emp1);//adding employee to the company
 company.addEmployee(mgr1);//adding manager to the company
 company.listEmployees();//listing the employees
 
-console.log("Total Payroll:", company.calculateTotalPayroll());//Total Payroll: 84000
+console.log("Total Payroll:", company.calculateTotalPayroll());//Total Payroll: 165600
+
+company.promoteToManager(emp1, 3);//promoting employee to manager
+company.listEmployees();//listing the employees
+
+
+
+
 
 
 
